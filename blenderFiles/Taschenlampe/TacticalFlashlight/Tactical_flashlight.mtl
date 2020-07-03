@@ -1,0 +1,30 @@
+# Blender MTL File: 'flash.blend'
+# Material Count: 3
+
+newmtl Glass
+Ns 749.999996
+Ka 1.000000 1.000000 1.000000
+Kd 0.254733 0.254733 0.254733
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.200000
+illum 0
+map_Kd Emission.png
+
+newmtl None
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+
+newmtl None_Glass_Albedo
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd Opacity_Lens.png
