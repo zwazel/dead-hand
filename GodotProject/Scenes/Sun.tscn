@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/SunControl.gd" type="Script" id=1]
+
+[node name="Sun" type="DirectionalLight"]
+transform = Transform( 1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 0, 0 )
+shadow_enabled = true
+script = ExtResource( 1 )

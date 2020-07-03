@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/UI/Tutorial/Hints/FlashlightHint.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/UI/Tutorial/Hints/OpenCapsuleHint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/UI/Tutorial/Hints/LookAroundHint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/UI/Tutorial/Hints/MoveHint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/UI/Tutorial/Hints/SprintHint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/UI/Tutorial/Hints/CrouchHint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/UI/Tutorial/Hints/OpenBigDoorHint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/UI/Tutorial/Hints/DefeatTheRobotHint.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/UI/tutorial/TutorialHintsScreen.gd" type="Script" id=9]
+
+[node name="TutorialHintsScreen" type="Control"]
+pause_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LookAroundHint" parent="." instance=ExtResource( 3 )]
+visible = false
+margin_right = 0.0
+
+[node name="OpenCapsuleHint" parent="." instance=ExtResource( 2 )]
+visible = false
+margin_right = 0.00170898
+
+[node name="MoveHint" parent="." instance=ExtResource( 4 )]
+visible = false
+margin_right = 0.00170898
+
+[node name="CrouchHint" parent="." instance=ExtResource( 6 )]
+visible = false
+margin_right = 0.00170898
+
+[node name="SprintHint" parent="." instance=ExtResource( 5 )]
+visible = false
+margin_right = 0.00170898
+
+[node name="FlashlightHint" parent="." instance=ExtResource( 1 )]
+visible = false
+margin_right = 0.00170898
+margin_bottom = 99.0
+
+[node name="OpenBigDoorHint" parent="." instance=ExtResource( 7 )]
+visible = false
+margin_right = 0.00170898
+
+[node name="DefeatTheRobotHint" parent="." instance=ExtResource( 8 )]
+visible = false
+margin_right = 0.00170898
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

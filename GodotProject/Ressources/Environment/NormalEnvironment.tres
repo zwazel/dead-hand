@@ -1,0 +1,12 @@
+[gd_resource type="Environment" format=2]
+
+[resource]
+background_mode = 1
+fog_transmit_enabled = true
+fog_height_enabled = true
+tonemap_mode = 3
+ss_reflections_enabled = true
+dof_blur_near_enabled = true
+dof_blur_near_distance = 1.0
+dof_blur_near_quality = 2
+glow_enabled = true

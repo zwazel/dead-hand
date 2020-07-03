@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/UI/HUD/hud.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/montserrat_regular_16.tres" type="DynamicFont" id=3]
+
+[node name="hud" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 100, 12 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+fpsLabel = NodePath("fps")
+musicLabel = NodePath("currentMusic")
+
+[node name="fps" type="Label" parent="."]
+margin_right = 31.0
+margin_bottom = 21.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+custom_fonts/font = ExtResource( 3 )
+text = "FPS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="currentMusic" type="Label" parent="."]
+margin_top = 24.0
+margin_right = 33.0
+margin_bottom = 45.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+custom_fonts/font = ExtResource( 3 )
+text = "Musik"
+__meta__ = {
+"_edit_use_anchors_": false
+}

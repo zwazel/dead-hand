@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/UI/MenuButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/UI/ExitGameButton.gd" type="Script" id=2]
+
+[node name="ExitGameButton" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Label" parent="." index="0"]
+text = "Beenden"
+[connection signal="button_down" from="." to="." method="_on_ExitGameButton_button_down"]
+[connection signal="pressed" from="." to="." method="_on_ExitGame_pressed"]

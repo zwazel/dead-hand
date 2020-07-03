@@ -1,0 +1,210 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/UI/PauseMenu/Buttons/Resume.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/UI/PauseMenu/Buttons/BackToMainMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/UI/PauseMenu/PauseScreen.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/montserrat/Montserrat-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scenes/UI/OptionsMenu/OptionsMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/UI/PauseMenu/Buttons/Settings.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/UI/VersionLabel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/UI/ExitGameButton.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "move_top_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1920, -1080 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1920, 1080 ) ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 25
+use_filter = true
+font_data = ExtResource( 4 )
+
+[node name="PauseScreen" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/move_top_left = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.257813, 0.220551, 0.220551, 0.490196 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="."]
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 1820.0
+margin_bottom = 1020.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Top" type="HBoxContainer" parent="Menu"]
+margin_right = 1720.0
+margin_bottom = 300.0
+size_flags_vertical = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/Top"]
+margin_right = 858.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Resume" parent="Menu/Top/Buttons" instance=ExtResource( 1 )]
+margin_right = 858.0
+
+[node name="Settings" parent="Menu/Top/Buttons" instance=ExtResource( 6 )]
+margin_top = 80.0
+margin_right = 858.0
+margin_bottom = 140.0
+
+[node name="BackToMainMenu" parent="Menu/Top/Buttons" instance=ExtResource( 2 )]
+margin_top = 160.0
+margin_right = 858.0
+margin_bottom = 220.0
+pauseScreen = NodePath("../../../..")
+
+[node name="ExitGame" parent="Menu/Top/Buttons" instance=ExtResource( 8 )]
+margin_top = 240.0
+margin_right = 858.0
+margin_bottom = 300.0
+
+[node name="HelperText" type="VBoxContainer" parent="Menu/Top"]
+margin_left = 862.0
+margin_right = 1720.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+alignment = 1
+
+[node name="HelperText" type="Label" parent="Menu/Top/HelperText"]
+margin_right = 858.0
+margin_bottom = 277.0
+size_flags_vertical = 2
+custom_fonts/font = SubResource( 2 )
+text = "WASD um zu bewegen.
+Space um zu Springen
+LShift um zu Rennen.
+Q/E um zu Lehnen
+LCTRL um zu Ducken
+F um zu interagieren
+T um Taschenlampe an/aus schalten
+TAB um in Thirdperson zu wechseln (Experimentell)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Toggles" type="VBoxContainer" parent="Menu"]
+margin_top = 321.0
+margin_right = 1720.0
+margin_bottom = 638.0
+size_flags_vertical = 3
+
+[node name="SunActive" type="CheckButton" parent="Menu/Toggles"]
+margin_right = 150.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 2
+text = "Sonne"
+
+[node name="PlayerInvisible" type="CheckButton" parent="Menu/Toggles"]
+margin_top = 44.0
+margin_right = 150.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 2
+text = "Unsichtbar"
+
+[node name="FlashlightVisible" type="CheckButton" parent="Menu/Toggles"]
+margin_top = 88.0
+margin_right = 227.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 2
+pressed = true
+text = "Taschenlampe sichtbar"
+
+[node name="HideHUD" type="CheckButton" parent="Menu/Toggles"]
+margin_top = 132.0
+margin_right = 177.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 2
+text = "Verstecke HUD"
+
+[node name="SkipTutorial" type="CheckButton" parent="Menu/Toggles"]
+margin_top = 176.0
+margin_right = 210.0
+margin_bottom = 216.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 2
+text = "Überspringe Tutorial"
+
+[node name="Blinking" type="CheckButton" parent="Menu/Toggles"]
+margin_top = 220.0
+margin_right = 150.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 2
+pressed = true
+text = "Blinken"
+
+[node name="Debug" type="CheckButton" parent="Menu/Toggles"]
+margin_top = 264.0
+margin_right = 150.0
+margin_bottom = 304.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 2
+disabled = true
+text = "Debug"
+
+[node name="VersionLabel" parent="Menu" instance=ExtResource( 7 )]
+margin_top = 642.0
+margin_right = 1720.0
+margin_bottom = 960.0
+
+[node name="OptionsMenu" parent="." instance=ExtResource( 5 )]
+[connection signal="pressed" from="Menu/Top/Buttons/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="toggled" from="Menu/Toggles/SunActive" to="." method="_on_SunActive_toggled"]
+[connection signal="toggled" from="Menu/Toggles/PlayerInvisible" to="." method="_on_PlayerInvisible_toggled"]
+[connection signal="toggled" from="Menu/Toggles/FlashlightVisible" to="." method="_on_FlashlightVisible_toggled"]
+[connection signal="toggled" from="Menu/Toggles/HideHUD" to="." method="_on_HideHUD_toggled"]
+[connection signal="toggled" from="Menu/Toggles/SkipTutorial" to="." method="_on_SkipTutorial_toggled"]
+[connection signal="toggled" from="Menu/Toggles/Blinking" to="." method="_on_Blinking_toggled"]
+[connection signal="toggled" from="Menu/Toggles/Debug" to="." method="_on_Debug_toggled"]

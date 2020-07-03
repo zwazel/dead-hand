@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="FlashLightLight" type="SpotLight"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -5.96046e-08, 0.3 )
+light_bake_mode = 0
+shadow_enabled = true
+spot_range = 25.0
+spot_angle = 50.0

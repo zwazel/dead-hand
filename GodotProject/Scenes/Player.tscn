@@ -1,0 +1,120 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/PlayerFootSteps.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Sounds/Player/flashlightOnOffToggle.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sounds/Player/breathing_short.wav" type="AudioStream" id=4]
+[ext_resource path="res://Animations/Player/LeftStep.tres" type="Animation" id=5]
+[ext_resource path="res://Animations/Player/RightStep.tres" type="Animation" id=6]
+[ext_resource path="res://Animations/Player/Crouching.tres" type="Animation" id=7]
+[ext_resource path="res://Animations/Player/LeaningLeft.tres" type="Animation" id=8]
+[ext_resource path="res://Animations/Player/LeaningRight.tres" type="Animation" id=9]
+[ext_resource path="res://Animations/Player/LeaningLeftToRight.tres" type="Animation" id=10]
+[ext_resource path="res://Animations/Player/MoveHeadBack.tres" type="Animation" id=11]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=12]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 1.5
+
+[sub_resource type="CapsuleMesh" id=2]
+mid_height = 1.5
+
+[sub_resource type="CubeMesh" id=3]
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="FootSteps" parent="." instance=ExtResource( 2 )]
+
+[node name="Breathing" type="Node" parent="."]
+
+[node name="Breathing" type="AudioStreamPlayer" parent="Breathing"]
+stream = ExtResource( 4 )
+bus = "Sound"
+
+[node name="startBreathingTimer" type="Timer" parent="Breathing"]
+wait_time = 5.0
+one_shot = true
+
+[node name="FlashlightToggle" type="Node" parent="."]
+
+[node name="FlashlightToggle" type="AudioStreamPlayer" parent="FlashlightToggle"]
+stream = ExtResource( 3 )
+volume_db = -20.0
+bus = "Sound"
+
+[node name="AnimationPlayers" type="Node" parent="."]
+
+[node name="StepsAnimation" type="AnimationPlayer" parent="AnimationPlayers"]
+root_node = NodePath("../..")
+anims/left_step = ExtResource( 5 )
+anims/right_step = ExtResource( 6 )
+
+[node name="MovementAnim" type="AnimationPlayer" parent="AnimationPlayers"]
+root_node = NodePath("../..")
+anims/crouching = ExtResource( 7 )
+
+[node name="LeaningAnimation" type="AnimationPlayer" parent="AnimationPlayers"]
+root_node = NodePath("../..")
+anims/leaning_left = ExtResource( 8 )
+anims/leaning_right = ExtResource( 9 )
+anims/left_to_right = ExtResource( 10 )
+
+[node name="ThirdPersonAnimationPlayer" type="AnimationPlayer" parent="AnimationPlayers"]
+root_node = NodePath("../..")
+anims/move_head_back = ExtResource( 11 )
+
+[node name="BodyCollision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="BodyMesh" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+cast_shadow = 3
+mesh = SubResource( 2 )
+material/0 = null
+__meta__ = {
+"apply_volumetrics": false
+}
+
+[node name="HeadHolder" type="Spatial" parent="."]
+
+[node name="HeadBumpCheck" type="RayCast" parent="HeadHolder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+enabled = true
+cast_to = Vector3( 0, 1, 0 )
+
+[node name="HeadPos" type="Position3D" parent="HeadHolder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+
+[node name="Head" type="Spatial" parent="HeadHolder/HeadPos"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="Camera" type="Camera" parent="HeadHolder/HeadPos/Head"]
+pause_mode = 2
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0 )
+current = true
+far = 200.0
+script = ExtResource( 12 )
+
+[node name="MeshInstance" type="MeshInstance" parent="HeadHolder/HeadPos/Head"]
+transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0 )
+cast_shadow = 3
+mesh = SubResource( 3 )
+material/0 = null
+__meta__ = {
+"apply_volumetrics": false
+}
+
+[node name="Interacting" type="RayCast" parent="HeadHolder/HeadPos/Head"]
+enabled = true
+cast_to = Vector3( 0, 0, 3 )
+collide_with_areas = true
+
+[node name="Hand" type="Position3D" parent="HeadHolder/HeadPos/Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.7, 1.4 )
+[connection signal="finished" from="Breathing/Breathing" to="." method="_on_Breathing_finished"]
+[connection signal="timeout" from="Breathing/startBreathingTimer" to="." method="_on_startBreathingTimer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayers/MovementAnim" to="." method="_on_MovementAnim_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayers/LeaningAnimation" to="." method="_on_LeaningAnimation_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayers/ThirdPersonAnimationPlayer" to="." method="_on_ThirdPersonAnimationPlayer_animation_finished"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Sounds/Ambient/homemenu.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Scripts/BackGroundMusic.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sounds/Ambient/Deadhand Trailer.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sounds/Ambient/dead_hand.ogg" type="AudioStream" id=4]
+
+[node name="BackGroundMusic" type="Node"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="Menu - by Sam" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+bus = "Music"
+__meta__ = {
+"_editor_description_": "made by Sam"
+}
+
+[node name="Trailer - by Sam" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "Music"
+__meta__ = {
+"_editor_description_": "Made by Sam"
+}
+
+[node name="dead_hand - by Varunshan" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Music"
+__meta__ = {
+"_editor_description_": "made by Varunshan"
+}

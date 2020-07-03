@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Sounds/UI/UI button click.wav" type="AudioStream" id=1]
+
+[node name="ButtonClickSound" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+bus = "UI"
