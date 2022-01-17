@@ -103,4 +103,5 @@ margin_bottom = 12.0
 mouse_filter = 2
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 8 )]
+
 [connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]
